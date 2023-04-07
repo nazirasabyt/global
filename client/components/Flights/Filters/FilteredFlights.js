@@ -1,0 +1,36 @@
+import React from "react";
+import Flight from "./Flight";
+import { RxHamburgerMenu } from "react-icons/rx";
+
+const FilteredFlights = () => {
+  return (
+    <div className='flex flex-col w-[850px] '>
+      <div className='flex divide-x bg-white gap-6 py-4 px-6 rounded-md'>
+        <div className='py-1 px-6 flex flex-col gap-2'>
+          <h3 className='text-md font-semibold'>Cheapest</h3>
+          <p className='text-gray-primary opacity-40 text-sm'>$99 . 2h 18m</p>
+        </div>
+        <div className='py-1 px-6 flex flex-col gap-2'>
+          <h3 className='text-md font-semibold'>Best</h3>
+          <p className='text-gray-primary opacity-40 text-sm'>$99 . 2h 18m</p>
+        </div>
+        <div className='py-1 px-6 flex flex-col gap-2'>
+          <h3 className='text-md font-semibold'>Quickest</h3>
+          <p className='text-gray-primary opacity-40 text-sm'>$99 . 2h 18m</p>
+        </div>
+        <h3 className='flex justify-center items-center gap-2 py-1 px-6 text-md font-semibold'>
+          <RxHamburgerMenu />
+          Other sort
+        </h3>
+      </div>
+      <p className='text-sm font-semibold py-6'>
+        Showing 4 of <span className='text-salmon-clr'>157 places</span>
+      </p>
+      <div>
+        <Flight />
+      </div>
+    </div>
+  );
+};
+
+export default FilteredFlights;
