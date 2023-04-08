@@ -12,3 +12,7 @@ body {
   // max-width: 1440px;
   background: #f5f5f5;
 }
+
+.active {
+  @apply bg-brand-clr rounded-2xl;
+}

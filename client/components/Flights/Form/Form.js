@@ -13,6 +13,7 @@ import "react-date-range/dist/theme/default.css";
 import { useRouter } from "next/router";
 import { addOrUpdateItem } from "../../../utils/helpers";
 import { HiUsers } from "react-icons/hi";
+import UseSearchContext from "../../../hooks/useSearchContext";
 
 const Form = () => {
   const [modal, setModal] = useState(false);
@@ -100,193 +101,191 @@ const Form = () => {
 
   const router = useRouter();
 
+  const { searchForm, persistSearchFlight } = UseSearchContext();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("formData", JSON.stringify(formData));
+    // localStorage.setItem("formData", JSON.stringify(formData));
+    persistSearchFlight(formData);
     router.push("/flights");
   };
   return (
-    <div>
-      {" "}
-      <form onSubmit={handleSubmit}>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4  relative '>
-          <div className='relative col-span-1 block text-sm font-medium text-slate-700'>
-            {" "}
-            <h5 className='font-semibold md:text-sm  mb-1 '> From</h5>
-            <label className='relative block'>
-              <span className='absolute inset-y-0 left-2 flex items-center'>
-                <FaPlaneDeparture className='icon' />
-              </span>
-              <input
-                required
-                name='from'
-                id='from'
-                placeholder='Origin'
-                className=' block bg-white w-full border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
-                value={formData.from}
-                onChange={(e) => handleInput(e)}
-              />
-            </label>
-            {fromCitiesData.length != 0 && citiesList.from && (
-              <div className='absolute  top-16 bg-white border-b rounded-lg z-100 shadow-basic w-40'>
-                {fromCitiesData.map((item) => {
-                  return (
-                    <button
-                      key={item.code}
-                      type={"button"}
-                      className='flex text-start space-x-1 items-center py-2 px-1 border-b last:border-none w-full hover:bg-gray-400'
-                      onClick={(e) => handlePlace(e, "from")}>
-                      <span className=''>
-                        <IoLocationSharp className='' />
-                      </span>
-                      <span className='text-sm  italic text-gray-700'>
-                        {item.city}
-                        {`(${item.code})`}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-          <div className='relative col-span-1  block text-sm font-medium text-slate-700'>
-            {" "}
-            <h5 className='font-semibold md:text-sm  mb-1'> To</h5>
-            <label className=' relative block'>
-              <span className='absolute inset-y-0 left-2 flex items-center'>
-                <FaPlaneArrival className='icon' />
-              </span>
-              <input
-                required
-                name='to'
-                id='to'
-                placeholder='Destination'
-                className=' block bg-white  w-full border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
-                value={formData.to}
-                onChange={(e) => handleInput(e)}
-              />
-            </label>
-            {toCitiesData.length != 0 && citiesList.to && (
-              <div className=' absolute  top-16 bg-white border-b rounded-lg z-100 shadow-basic w-40   '>
-                {toCitiesData.map((item) => {
-                  return (
-                    <button
-                      key={item.code}
-                      type={"button"}
-                      className='flex text-start space-x-1 items-center py-2 px-1 border-b last:border-none w-full hover:bg-gray-400'
-                      onClick={(e) => handlePlace(e, "to")}>
-                      <span className=''>
-                        <IoLocationSharp />
-                      </span>
-                      <span className='text-sm  italic text-gray-700'>
-                        {item.city}
-                        {`(${item.code})`}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-          <div className=' text-sm font-medium text-slate-700'>
-            {" "}
-            <h5 className='font-semibold md:text-sm  mb-1'> Departure</h5>
-            <label className=' relative block  '>
-              <span className='absolute  flex items-center inset-y-0 left-2'>
-                <FaRegCalendarAlt className='icon' />
-              </span>
-              <input
-                required
-                name='departure'
-                placeholder='mm/dd/yyyy'
-                value={departureDate}
-                className=' block w-full bg-white  border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
-                onChange={() => {}}
-                onClick={() => setOpenDeparture((open) => !open)}
-              />
-              <div>
-                {isOpenDeparture && (
-                  <Calendar
-                    date={new Date()}
-                    onChange={handleSelectDeparture}
-                    minDate={new Date()}
-                    maxDate={addDays(new Date(), 300)}
-                    className='absolute z-100 '
-                    color='#8DD3BB'
-                  />
-                )}
-              </div>
-            </label>
-          </div>
-
-          <div className='text-sm font-medium text-slate-700'>
-            {" "}
-            <h5 className='font-semibold md:text-sm  mb-1'> Return</h5>
-            <label className=' relative block  '>
-              <span className='absolute  flex items-center inset-y-0 left-2'>
-                <FaRegCalendarAlt className='icon' />
-              </span>
-              <input
-                required
-                value={returnDate}
-                placeholder='mm/dd/yyyy'
-                name='return'
-                className=' w-full bg-white  border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
-                onChange={() => {}}
-                onClick={() => setOpenReturn((open) => !open)}
-              />
-              <div className='absolute '>
-                {isOpenReturn && (
-                  <Calendar
-                    date={new Date()}
-                    onChange={handleSelectReturn}
-                    minDate={new Date()}
-                    maxDate={addDays(new Date(), 300)}
-                    className='absolute z-100 '
-                    color='#8DD3BB'
-                  />
-                )}
-              </div>
-            </label>
-          </div>
-
-          <div className='col-span-1  block text-sm font-medium text-slate-700'>
-            {" "}
-            <h5 className='font-semibold md:text-sm  mb-1'>Passengers</h5>
-            <label className=' relative block'>
-              <span className='absolute  flex items-center inset-y-0 left-2'>
-                <HiUsers className='icon' />
-              </span>
-              <input
-                required
-                placeholder='2 Adults, 1 Child, 0 Infants'
-                type='text'
-                className=' block  bg-white w-full border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
-                onChange={() => {}}
-                onClick={() => setModal((modal) => !modal)}
-                value={formData.pax.map((item) => {
-                  return `${item.adults} Adults, ${item.children} Child, ${item.infants} Infants`;
-                })}
-              />
-
-              <div ref={modalRef}>
-                {modal && <Modal add={handleModalData} />}
-              </div>
-            </label>
-          </div>
+    <form onSubmit={handleSubmit}>
+      <div className=' grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4  relative '>
+        <div className='relative col-span-1 block text-sm font-medium text-slate-700'>
+          {" "}
+          <h5 className='font-semibold md:text-sm  mb-1 '> From</h5>
+          <label className='relative block'>
+            <span className='absolute inset-y-0 left-2 flex items-center'>
+              <FaPlaneDeparture className='icon' />
+            </span>
+            <input
+              required
+              name='from'
+              id='from'
+              placeholder='Origin'
+              className=' block bg-white w-full border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
+              value={formData.from}
+              onChange={(e) => handleInput(e)}
+            />
+          </label>
+          {fromCitiesData.length != 0 && citiesList.from && (
+            <div className='absolute  top-16 bg-white border-b rounded-lg z-100 shadow-basic w-40'>
+              {fromCitiesData.map((item) => {
+                return (
+                  <button
+                    key={item.code}
+                    type={"button"}
+                    className='flex text-start space-x-1 items-center py-2 px-1 border-b last:border-none w-full hover:bg-gray-400'
+                    onClick={(e) => handlePlace(e, "from")}>
+                    <span className=''>
+                      <IoLocationSharp className='' />
+                    </span>
+                    <span className='text-sm  italic text-gray-700'>
+                      {item.city}
+                      {`(${item.code})`}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
-        <div
-          className='mt-6 sm:-mt-10 lg:mt-6 flex justify-end
+        <div className='relative col-span-1  block text-sm font-medium text-slate-700'>
+          {" "}
+          <h5 className='font-semibold md:text-sm  mb-1'> To</h5>
+          <label className=' relative block'>
+            <span className='absolute inset-y-0 left-2 flex items-center'>
+              <FaPlaneArrival className='icon' />
+            </span>
+            <input
+              required
+              name='to'
+              id='to'
+              placeholder='Destination'
+              className=' block bg-white  w-full border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
+              value={formData.to}
+              onChange={(e) => handleInput(e)}
+            />
+          </label>
+          {toCitiesData.length != 0 && citiesList.to && (
+            <div className=' absolute  top-16 bg-white border-b rounded-lg z-100 shadow-basic w-40   '>
+              {toCitiesData.map((item) => {
+                return (
+                  <button
+                    key={item.code}
+                    type={"button"}
+                    className='flex text-start space-x-1 items-center py-2 px-1 border-b last:border-none w-full hover:bg-gray-400'
+                    onClick={(e) => handlePlace(e, "to")}>
+                    <span className=''>
+                      <IoLocationSharp />
+                    </span>
+                    <span className='text-sm  italic text-gray-700'>
+                      {item.city}
+                      {`(${item.code})`}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+        <div className=' text-sm font-medium text-slate-700'>
+          {" "}
+          <h5 className='font-semibold md:text-sm  mb-1'> Departure</h5>
+          <label className=' relative block  '>
+            <span className='absolute  flex items-center inset-y-0 left-2'>
+              <FaRegCalendarAlt className='icon' />
+            </span>
+            <input
+              required
+              name='departure'
+              placeholder='mm/dd/yyyy'
+              value={departureDate}
+              className=' block w-full bg-white  border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
+              onChange={() => {}}
+              onClick={() => setOpenDeparture((open) => !open)}
+            />
+            <div>
+              {isOpenDeparture && (
+                <Calendar
+                  date={new Date()}
+                  onChange={handleSelectDeparture}
+                  minDate={new Date()}
+                  maxDate={addDays(new Date(), 300)}
+                  className='absolute z-100 '
+                  color='#8DD3BB'
+                />
+              )}
+            </div>
+          </label>
+        </div>
+
+        <div className='text-sm font-medium text-slate-700'>
+          {" "}
+          <h5 className='font-semibold md:text-sm  mb-1'> Return</h5>
+          <label className=' relative block  '>
+            <span className='absolute  flex items-center inset-y-0 left-2'>
+              <FaRegCalendarAlt className='icon' />
+            </span>
+            <input
+              required
+              value={returnDate}
+              placeholder='mm/dd/yyyy'
+              name='return'
+              className=' w-full bg-white  border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
+              onChange={() => {}}
+              onClick={() => setOpenReturn((open) => !open)}
+            />
+            <div className='absolute '>
+              {isOpenReturn && (
+                <Calendar
+                  date={new Date()}
+                  onChange={handleSelectReturn}
+                  minDate={new Date()}
+                  maxDate={addDays(new Date(), 300)}
+                  className='absolute z-100 '
+                  color='#8DD3BB'
+                />
+              )}
+            </div>
+          </label>
+        </div>
+
+        <div className='col-span-1  block text-sm font-medium text-slate-700'>
+          {" "}
+          <h5 className='font-semibold md:text-sm  mb-1'>Passengers</h5>
+          <label className=' relative block'>
+            <span className='absolute  flex items-center inset-y-0 left-2'>
+              <HiUsers className='icon' />
+            </span>
+            <input
+              required
+              placeholder='2 Adults, 1 Child, 0 Infants'
+              type='text'
+              className=' block  bg-white w-full border sm:h-[40px] rounded-sm py-2 pl-6 pr-3 shadow-sm focus:outline-none focus:border-brand-clr focus:ring-brand-clr focus:ring-1 sm:text-sm'
+              onChange={() => {}}
+              onClick={() => setModal((modal) => !modal)}
+              value={formData.pax.map((item) => {
+                return `${item.adults} Adults, ${item.children} Child, ${item.infants} Infants`;
+              })}
+            />
+
+            <div ref={modalRef}>{modal && <Modal add={handleModalData} />}</div>
+          </label>
+        </div>
+      </div>
+      <div
+        className='mt-6 sm:-mt-10 lg:mt-6 flex justify-end
           '>
-          <button
-            className=' bg-brand-clr hover:bg-[#70d4b2] focus:bg-[#70d4b2] flex text-black 
+        <button
+          className=' bg-brand-clr hover:bg-[#70d4b2] focus:bg-[#70d4b2] flex text-black 
           text-base rounded-md py-[8px] px-4 justify-center items-center gap-2 w-full sm:w-[230px] md:w-40 '
-            type='submit'>
-            Search Flights
-          </button>
-        </div>
-      </form>
-    </div>
+          type='submit'>
+          Search Flights
+        </button>
+      </div>
+    </form>
   );
 };
 

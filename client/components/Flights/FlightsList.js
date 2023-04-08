@@ -4,7 +4,7 @@ import FilteredFlights from "./Filters/FilteredFlights";
 
 const FlightsList = () => {
   return (
-    <div className='flex gap-12'>
+    <div className='flex  gap-12'>
       <Filters />
       <FilteredFlights />
     </div>

@@ -6,7 +6,7 @@ function AppLayout({ children }) {
   return (
     <>
       <Navbar />
-      <main className='relative'>{children}</main>
+      <main className='relative '>{children}</main>
       <Footer />
     </>
   );

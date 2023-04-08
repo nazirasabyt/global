@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import {
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
-} from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const Filters = () => {
   const [show, setShow] = useState(true);
   return (
-    <div className='flex flex-col justify-start w-[343px] ml-2'>
+    <div className='hidden lg:flex flex-col justify-start w-[343px] ml-2'>
       <h1 className='mb-8 text-xl font-semibold'>Filters</h1>
       <div className='flex flex-col divide-y gap-8'>
         <div>

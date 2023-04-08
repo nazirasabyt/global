@@ -4,7 +4,7 @@ import { trips } from "../../utils/data";
 
 const Place = () => {
   return (
-    <section className='grid  sm:grid-cols-4 gap-4  w-[1232px] mx-auto '>
+    <section className='grid  sm:grid-cols-4 gap-4  lg:w-[1232px] mx-auto '>
       {trips.map((el) => {
         return (
           <div key={el.id} className='relative'>

@@ -7,10 +7,11 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-// import GoogleAuthCallback from "./GoogleAuthCallback";
+import UseAuthContext from "../../hooks/useAuthContext";
 
 const LoginComponent = () => {
   const [show, setShow] = useState(false);
+  const { auth, authLogin } = UseAuthContext();
   const [user, setUser] = useState({
     identifier: "",
     password: "",
@@ -53,6 +54,7 @@ const LoginComponent = () => {
       console.log(data);
       if (data.jwt) {
         toast.success("Login Successful!");
+        authLogin(data);
         router.push("/");
       }
     } catch (err) {
@@ -64,15 +66,17 @@ const LoginComponent = () => {
   };
 
   return (
-    <div className=' w-full mx-auto flex flex-col mt-10'>
+    <div className=' w-full mx-auto flex flex-col px-10'>
       <h1 className='text-4xl font-semibold mb-4'>Login</h1>
       <p className='text-sm text-gray-primary'>Login to access your account</p>
       <div className='mt-10'>
-        <form className='flex flex-col gap-5 relative' onSubmit={handleSubmit}>
+        <form
+          className='flex flex-col gap-5 relative w-full'
+          onSubmit={handleSubmit}>
           <div>
             <input
               placeholder='Type your email'
-              className='border rounded-md h-12 sm:h-14 w-[300px] sm:w-full px-3  focus:outline-none '
+              className='border rounded-md h-14 w-full px-3  focus:outline-none  '
               name='identifier'
               type='email'
               onChange={(e) => handleUser(e)}
@@ -82,7 +86,7 @@ const LoginComponent = () => {
           <div className='relative'>
             <input
               placeholder='Type your password'
-              className='border rounded-md  h-12 sm:h-14 w-full p-3 focus:outline-none '
+              className='border rounded-md h-14 w-full px-3  focus:outline-none  '
               type={show ? "text" : "password"}
               name='password'
               onChange={(e) => handleUser(e)}

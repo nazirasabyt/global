@@ -30,10 +30,10 @@ const Footer = () => {
   return (
     <footer className='relative '>
       <section className='w-full h-full mt-20 relative'>
-        <div className='flex justify-between w-[85%] sm:w-[1232px]  mx-auto  rounded-3xl  bg-[#CDEAE1] absolute -top-36 inset-x-4'>
-          <div className='flex flex-col px-6 mb-4'>
-            <h1 className='text-2xl sm:text-4xl my-2 sm:my-6  font-bold pt-2'>
-              Subscribe <br /> Newsletter
+        <div className='flex justify-between w-[85%] lg:w-[1232px]  mx-auto  rounded-3xl  bg-[#CDEAE1] absolute bottom-24 sm:bottom-44 inset-x-4'>
+          <div className='flex flex-col px-6 sm:px-16 mb-4'>
+            <h1 className='text-xl sm:text-3xl my-2 sm:my-6  font-semibold pt-2'>
+              Subscribe Newsletter
             </h1>
             <h3 className='text-sm sm:text-xl mb-2 '>The Travel</h3>
             <p className='text-xs sm:text-lg mb-4  text-[#112211]'>
@@ -45,7 +45,7 @@ const Footer = () => {
               className=' flex flex-col lg:flex-row gap-4  text-sm  sm:text-lg'>
               <input
                 placeholder='Your email adress'
-                className='w-full md:w-[500px] h-10 sm:h-16 pl-2 rounded-md outline-none '
+                className='w-full lg:w-[500px] h-8 sm:h-12 lg:h-14 pl-2 rounded-md outline-none '
                 name='subscribe'
                 onChange={(e) => handleInput(e)}
                 required
@@ -53,19 +53,19 @@ const Footer = () => {
               />
               <button
                 type='submit'
-                className=' rounded-md bg-black text-white  py-2 px-4 mb-4 sm:py-4'>
+                className=' rounded-md bg-black text-white  py-2 px-4 mb-4 sm:py-3'>
                 Subscribe
               </button>
             </form>
           </div>
           <div
-            className='hidden sm:flex
+            className='hidden lg:flex
           '>
             <Image
               src='/img/post.png'
               alt='Post Box'
-              width={400}
-              height={305}
+              width={300}
+              height={205}
               className='mr-8'
               loading='lazy'
             />
@@ -101,7 +101,7 @@ const Footer = () => {
                 </i>
               </div>
             </div>
-            <ul className='hidden sm:flex flex-col gap-1'>
+            <ul className='hidden lg:flex flex-col gap-1'>
               <h1 className='font-semibold'>Our Destinations</h1>
               <li>UAE</li>
               <li>Saudi Arabia</li>

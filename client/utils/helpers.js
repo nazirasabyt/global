@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
@@ -16,16 +17,32 @@ export const addOrUpdateItem = (arr, item) => {
   return tempArr;
 };
 
-export const getLocalStorage = () => {
+export const getLocalStorageAuth = () => {
   if (typeof window !== "undefined") {
-    let searchData = localStorage.getItem("formData");
-    return searchData ? JSON.parse(searchData) : {};
+    let auth = localStorage.getItem("auth");
+    return auth
+      ? JSON.parse(auth)
+      : {
+          firstName: "",
+          lastName: "",
+          email: "",
+          accessToken: "",
+          privateKey: "",
+        };
   }
 };
 export const getLocalStoragePax = () => {
   if (typeof window !== "undefined") {
-    let paxData = localStorage.getItem("passengersData");
-    return paxData ? JSON.parse(paxData) : {};
+    let formData = localStorage.getItem("formData");
+    return formData
+      ? JSON.parse(formData)
+      : {
+          from: "",
+          to: "",
+          departure: format(new Date(), "y-MM-dd"),
+          return: format(new Date(), "y-MM-dd"),
+          pax: [],
+        };
 
     // let paxData = localStorage.getItem("passengersData");
     // if (!localStorage.getItem("passengersData") || paxData.length === 0) {

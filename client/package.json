@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@3rdweb/hooks": "^1.9.2",
+    "@headlessui/react": "^1.7.13",
     "@hookform/resolvers": "^2.9.10",
     "@reduxjs/toolkit": "^1.9.1",
     "@web3-react/core": "^6.1.9",
