@@ -1,19 +1,21 @@
 # global
 Hi there 👋,
-This is a coding test for a flight booking website , built with Next.js that offers connection to Metamask.
+This is a flight booking website , built with Next.js that showcases my coding skills.
+
 
 Live Demo : 
 
 Flight flow consists of three-levels
 
-First Level: Flight Form page to fill in all data about the required flight (origin "city(airport code)" - destination "city (airport code)" - departure date - return date - passenger count )
+First Level: A form that searches for flights
 
-Second Level: flight list with different options
+Second Level: Page that lists flight options depending on the search value
 
-Third Level: payment page, Shows all details of the flights and total amount to pay
+Third Level: Payment page, shows all details of the flight and total amount to pay. Payments are possible only if authenticated so , there is a backend running to login and register as well.
 
-Its a quick fix without much of error handling.
-🔭Currently working on connecting other providers to login ,flitering options payment page and error validations
+
+
+🔭Currently working on connecting other providers to login , flight filtering options, payment page and error validations
 
 this test app can only search for these flights:
 
