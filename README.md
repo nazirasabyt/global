@@ -19,8 +19,8 @@ Third Level: Payment page, shows all details of the flight and total amount to p
 
 this test app can only search for these flights:
 
-Dubai - Bahrain
-London - Moscow
+"Dubai - Bahrain"
+"London - Moscow"
 
 
 
