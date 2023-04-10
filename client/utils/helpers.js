@@ -54,3 +54,41 @@ export const getLocalStoragePax = () => {
     // }
   }
 };
+
+const fetchAPI = async () => {
+  const res = await fetch(
+    `${process.env.API_URL || "https://portfolio-app.global.com"}/graphql`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    }
+  );
+
+  const json = await res.json();
+  if (json.errors) {
+    console.log(json.errors);
+    throw new Error("Failed to fetch API");
+  }
+
+  return json.data;
+};
+
+export const getFlights = async () => {
+  const data = await fetchAPI(`query Flights{
+    flights{
+     id
+     title
+     category{
+      id 
+      name
+     }
+    }
+  }`);
+  return data.flights;
+};
