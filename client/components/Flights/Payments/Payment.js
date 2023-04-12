@@ -4,7 +4,7 @@ const Payment = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <div className='bg-white rounded-lg shadow-lg p-6 gap-4 flex flex-col'>
+    <div className='bg-white rounded-lg shadow-lg p-6 gap-4 flex flex-col w-full m-auto'>
       <div
         className={` flex justify-between p-4 ${active == 0 ? "active" : ""}`}>
         <div className='flex flex-col gap-1'>
@@ -17,6 +17,7 @@ const Payment = () => {
           name='paynow'
           checked={active == 0}
           onClick={() => setActive(0)}
+          onChange={() => {}}
         />
       </div>
 
@@ -35,6 +36,7 @@ const Payment = () => {
           name='paylater'
           checked={active == 1}
           onClick={() => setActive(1)}
+          onChange={()=>{}}
         />
       </div>
     </div>

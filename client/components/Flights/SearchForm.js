@@ -1,52 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import { cities } from "../../utils/data";
-import { format } from "date-fns";
+import { useState } from "react";
+
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Form from "./Form/Form";
 
 const SearchForm = () => {
-  const [citiesList, setCitiesList] = useState({
-    from: false,
-    to: false,
+  const [trip, setTrip] = useState({
+    type: "OneWay",
   });
-
-  const [formData, setFormData] = useState({
-    from: "",
-    to: "",
-    departure: format(new Date(), "y-MM-dd"),
-    return: format(new Date(), "y-MM-dd"),
-    pax: [],
-  });
-
-  const modalRef = useRef(null);
-  useEffect(() => {
-    document.addEventListener("click", hideOnClickOutside, true);
-  });
-
-  const hideOnClickOutside = (e) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
-      setModal(false);
-    }
-  };
 
   const handleInput = (e) => {
     let name = e.currentTarget.name;
     let value = e.currentTarget.value;
-    setFormData({ ...formData, [name]: value });
-
-    const newFilter = cities.filter((word) => {
-      return word.city.toLowerCase().includes(value.toLowerCase());
-    });
-
-    if (name === "from") {
-      setCitiesList({ ...citiesList, from: true });
-      setFromCitiesData(newFilter);
-    }
-    if (name === "to") {
-      setCitiesList({ ...citiesList, to: true });
-      setToCitiesData(newFilter);
-    }
+    setTrip({ ...trip, [name]: value });
   };
 
   return (
@@ -60,7 +26,7 @@ const SearchForm = () => {
             value={"OneWay"}
             onChange={(e) => handleInput(e)}
             className='appearance-none peer'
-            checked={formData.type === "OneWay"}
+            checked={trip.type === "OneWay"}
           />
           <label
             htmlFor='one'
@@ -77,7 +43,7 @@ const SearchForm = () => {
             value={"Return"}
             onChange={(e) => handleInput(e)}
             className='appearance-none peer'
-            checked={formData.type === "Return"}
+            checked={trip.type === "Return"}
           />
           <label
             htmlFor='round'
@@ -87,7 +53,7 @@ const SearchForm = () => {
         </div>
       </div>
 
-      <Form />
+      <Form trip={trip} />
     </div>
   );
 };

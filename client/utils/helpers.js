@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import Router from "next/router";
 
 export const classNames = (...classes) => {
@@ -44,15 +44,6 @@ export const getLocalStoragePax = () => {
           return: format(new Date(), "y-MM-dd"),
           pax: [],
         };
-
-    // let paxData = localStorage.getItem("passengersData");
-    // if (!localStorage.getItem("passengersData") || paxData.length === 0) {
-    //   try {
-    //     localStorage.setItem("passengersData", JSON.stringify({}));
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
   }
 };
 
@@ -62,44 +53,12 @@ export default async function fetcher(url, option = {}) {
     response = await fetch(url);
   } else {
     response = await fetch(url, option);
+    console.log(response);
   }
 
+  if (!response.ok) {
+    throw new Error(`Error! status: ${response.status}`);
+  }
   const data = await response.json();
   return data;
 }
-
-// export const setToken = (data) => {
-//   if (typeof window === undefined) {
-//     return;
-//   }
-//   Cookies.set("id", data.user.id);
-//   Cookies.set("username", data.user.username);
-//   Cookies.set("jwt", data.jwt);
-
-//   if (Cookies.get("username")) {
-//     Router.reload("/");
-//   }
-// };
-
-// export const unsetToken = () => {
-//   if (typeof window === "undefined") {
-//     return;
-//   }
-
-//   Cookies.remove("id");
-//   Cookies.remove("username");
-//   Cookies.remove("jwt");
-// };
-
-// export const getUserFromLocalCookie = () => {
-//   return Cookies.get("username");
-// };
-// export const getIdFromLocalCookie = () => {
-//   return Cookies.get("id");
-// };
-// export const getTokenFromLocalCookie = () => {
-//   return Cookies.get("jwt");
-// };
-// export const getTokenFromServer = () => {
-//   return Cookies.get("username");
-// };
