@@ -1,4 +1,7 @@
 import { format } from "date-fns";
+import Cookies from "js-cookie";
+import Router from "next/router";
+
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
@@ -20,15 +23,13 @@ export const addOrUpdateItem = (arr, item) => {
 export const getLocalStorageAuth = () => {
   if (typeof window !== "undefined") {
     let auth = localStorage.getItem("auth");
-    return auth
-      ? JSON.parse(auth)
-      : {
-          firstName: "",
-          lastName: "",
-          email: "",
-          accessToken: "",
-          privateKey: "",
-        };
+    return auth ? JSON.parse(auth) : null;
+  }
+};
+export const getLocalStorageJWT = () => {
+  if (typeof window !== "undefined") {
+    let auth = localStorage.getItem("auth");
+    return auth ? JSON.parse(auth.jwt) : "";
   }
 };
 export const getLocalStoragePax = () => {
@@ -55,40 +56,50 @@ export const getLocalStoragePax = () => {
   }
 };
 
-const fetchAPI = async () => {
-  const res = await fetch(
-    `${process.env.API_URL || "https://portfolio-app.global.com"}/graphql`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
-    }
-  );
-
-  const json = await res.json();
-  if (json.errors) {
-    console.log(json.errors);
-    throw new Error("Failed to fetch API");
+export default async function fetcher(url, option = {}) {
+  let response;
+  if (!option) {
+    response = await fetch(url);
+  } else {
+    response = await fetch(url, option);
   }
 
-  return json.data;
-};
+  const data = await response.json();
+  return data;
+}
 
-export const getFlights = async () => {
-  const data = await fetchAPI(`query Flights{
-    flights{
-     id
-     title
-     category{
-      id 
-      name
-     }
-    }
-  }`);
-  return data.flights;
-};
+// export const setToken = (data) => {
+//   if (typeof window === undefined) {
+//     return;
+//   }
+//   Cookies.set("id", data.user.id);
+//   Cookies.set("username", data.user.username);
+//   Cookies.set("jwt", data.jwt);
+
+//   if (Cookies.get("username")) {
+//     Router.reload("/");
+//   }
+// };
+
+// export const unsetToken = () => {
+//   if (typeof window === "undefined") {
+//     return;
+//   }
+
+//   Cookies.remove("id");
+//   Cookies.remove("username");
+//   Cookies.remove("jwt");
+// };
+
+// export const getUserFromLocalCookie = () => {
+//   return Cookies.get("username");
+// };
+// export const getIdFromLocalCookie = () => {
+//   return Cookies.get("id");
+// };
+// export const getTokenFromLocalCookie = () => {
+//   return Cookies.get("jwt");
+// };
+// export const getTokenFromServer = () => {
+//   return Cookies.get("username");
+// };

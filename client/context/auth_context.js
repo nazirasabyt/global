@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getLocalStorageAuth } from "../utils/helpers";
+import Router from "next/router";
 
 const initialContext = {
   auth: getLocalStorageAuth(),
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
       provider: "",
     });
     localStorage.removeItem("auth");
+    Router.reload("/");
   };
 
   return (

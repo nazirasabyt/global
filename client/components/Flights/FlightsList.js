@@ -2,11 +2,11 @@ import React from "react";
 import Filters from "./Filters/Filters";
 import FilteredFlights from "./Filters/FilteredFlights";
 
-const FlightsList = () => {
+const FlightsList = ({ flights }) => {
   return (
-    <div className='flex  gap-12'>
+    <div className="flex  gap-12">
       <Filters />
-      <FilteredFlights />
+      <FilteredFlights flights={flights} />
     </div>
   );
 };

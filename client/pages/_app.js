@@ -13,7 +13,8 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider>
       <ThirdwebWeb3Provider
         supportedChainIds={supportedChainIds}
-        connectors={connectors}>
+        connectors={connectors}
+      >
         <Component {...pageProps} />
         <ToastContainer />
       </ThirdwebWeb3Provider>

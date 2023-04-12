@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flights",
+  "info": {
+    "singularName": "flight",
+    "pluralName": "flights",
+    "displayName": "flights"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cityFrom": {
+      "type": "string"
+    },
+    "cityTo": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "airline": {
+      "type": "string"
+    },
+    "departure": {
+      "type": "string"
+    },
+    "arrival": {
+      "type": "string"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "price": {
+      "type": "integer"
+    }
+  }
+}

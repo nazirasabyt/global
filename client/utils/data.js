@@ -48,9 +48,9 @@ export const cities = [
     code: "CDG",
   },
   {
-    id: "bahrain",
-    city: "Bahrain",
-    code: "BHR",
+    id: "bali",
+    city: "Bali",
+    code: "DPS",
   },
   {
     id: "antalya",
@@ -58,9 +58,9 @@ export const cities = [
     code: "AYT",
   },
   {
-    id: "beijing",
-    city: "Beijing",
-    code: "PEK",
+    id: "new-york",
+    city: "New-York",
+    code: "JFK",
   },
   {
     id: "moscow",
