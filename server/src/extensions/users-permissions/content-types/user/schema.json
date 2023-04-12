@@ -77,6 +77,9 @@
     },
     "adress": {
       "type": "text"
+    },
+    "avatar": {
+      "type": "string"
     }
   }
 }
