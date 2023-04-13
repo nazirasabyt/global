@@ -28,6 +28,15 @@ export async function getServerSideProps(context) {
     }
   );
 
+  if (!res.data) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       flight: res.data.data,
