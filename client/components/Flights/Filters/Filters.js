@@ -17,7 +17,7 @@ const Filters = () => {
             <>
               <div className='flex justify-between  mb-2 relative'>
                 <span className='w-6 h-6 bg-brand-clr rounded-full cursor-pointer'></span>
-                <div className='border-b-2 border-gray-primary  w-[292px] absolute left-6 top-3'></div>
+                <div className='border-b-2 border-gray-primary  w-[295px] absolute left-6 top-3'></div>
                 <span className='w-6 h-6 bg-brand-clr rounded-full cursor-pointer'></span>
               </div>
               <div className='flex justify-between'>
@@ -38,7 +38,7 @@ const Filters = () => {
               {" "}
               <div className='flex justify-between  mb-2 relative'>
                 <span className='w-6 h-6 bg-brand-clr rounded-full cursor-pointer'></span>
-                <div className='border-b-2 border-gray-primary  w-[292px] absolute left-6 top-3'></div>
+                <div className='border-b-2 border-gray-primary  w-[295px] absolute left-6 top-3'></div>
                 <span className='w-6 h-6 bg-brand-clr rounded-full cursor-pointer'></span>
               </div>
               <div className='flex justify-between'>

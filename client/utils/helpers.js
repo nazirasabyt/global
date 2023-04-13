@@ -1,6 +1,4 @@
 import { format } from "date-fns";
-// import Cookies from "js-cookie";
-import Router from "next/router";
 
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Travel = () => {
   return (
-    <div className='hidden sm:flex flex-col w-[700px]  mx-auto lg:w-[1232px] h-[95vh] lg:h-[80vh] '>
+    <div className='hidden sm:flex flex-col w-[700px]  mx-auto lg:w-[1232px] h-[95vh] lg:h-[60vh] '>
       <h2 className='text-4xl font-semibold mb-2 '>Fall into travel</h2>
       <p className=' '>
         Going somewhere to celebrate this season? Whether you’re going home or

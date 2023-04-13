@@ -25,10 +25,7 @@ const FilteredFlights = ({ flights }) => {
           Other sort
         </h3>
       </div>
-      <p className='text-sm font-semibold py-6'>
-        Showing 1 of{" "}
-        <span className='text-salmon-clr'>{`${data.length}`} flights</span>
-      </p>
+
       <div>
         <Flight data={data} />
       </div>
