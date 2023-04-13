@@ -20,7 +20,10 @@ export async function getServerSideProps(context) {
   const id = params.details;
 
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/flights/${id}?populate=*`,
+    `${
+      process.env.NEXT_PUBLIC_STRAPI_URL ||
+      "https://sheltered-reef-77249.herokuapp.com/api"
+    }/flights/${id}?populate=*`,
     {
       headers: {
         Authorization: "bearer" + process.env.NEXT_APP_API_TOKEN,
