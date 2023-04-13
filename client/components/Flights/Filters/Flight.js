@@ -6,8 +6,8 @@ import { getLocalStoragePax } from "../../../utils/helpers";
 const Flight = (props) => {
   const searchedFlight = getLocalStoragePax();
   const { data } = props;
-  console.log(data);
-  const [filteredFlights, setFilteredFlights] = useState();
+
+  const [filteredFlights, setFilteredFlights] = useState([]);
 
   useEffect(() => {
     let arr = [];
@@ -23,11 +23,16 @@ const Flight = (props) => {
       setFilteredFlights(arr);
     });
   }, []);
-  console.log(filteredFlights);
 
   return (
     <div className=' flex flex-col gap-8 w-[360px]  sm:w-[800px] mx-auto'>
-      {filteredFlights &&
+      <p className='text-sm font-semibold py-6'>
+        Showing {`${filteredFlights.length}`} of{" "}
+        <span className='text-salmon-clr'>
+          {`${filteredFlights.length}`} flights
+        </span>
+      </p>
+      {filteredFlights.length > 0 ? (
         filteredFlights.map((item) => {
           return (
             <div
@@ -84,7 +89,10 @@ const Flight = (props) => {
               </p>
             </div>
           );
-        })}
+        })
+      ) : (
+        <p className='text-salmon-clr'>No flights found! Try different city</p>
+      )}
     </div>
   );
 };
