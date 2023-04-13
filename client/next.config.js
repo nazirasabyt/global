@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["127.0.0.1"],
+    domains: ["sheltered-reef-77249.herokuapp.com"],
   },
 };
 
